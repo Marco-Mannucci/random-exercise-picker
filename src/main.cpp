@@ -4,15 +4,13 @@
 // Remembers the exercises already proposed and does not propose them again
 // Press Esc to start over with a new range
 
-#include "function.h"
-#include <iostream>
 #include <random>
-#include <string>
-#include <conio.h>      // To read the Esc key
+
+#include "function.h"
 
 using namespace std;
 
-int main() {
+int main(){
 
     // Get a random seed from the hardware
     random_device rd;
@@ -20,30 +18,20 @@ int main() {
     // Initialize the Mersenne Twister engine with the seed
     mt19937 gen( rd() );
 
-    // Opening banner
     printBanner();
 
-    cout << endl;
-
-    // Loop flags
-    bool run = true;                // Main loop
-    bool session = true;           // Session loop
-
-    // Variables used inside the loops
     int lowerLimit, upperLimit;             // Limits
-    int key;                                // To read Enter or Esc
-    bool input;                             // Checks whether the user input is valid
-    string line;
+    bool run = true;                        // Main loop
 
     while ( run ) {
-        while ( session ) {
 
-            // Read the limits from the user
-            getData( lowerLimit, upperLimit );
+        getData( lowerLimit, upperLimit );
 
-            // Random number range
-            uniform_int_distribution<int> distrib( lowerLimit, upperLimit );
-        }
+        eseguiSessione( gen, lowerLimit, upperLimit );
+
+        // Y = new session, N = exit the program
+        run = askNewSession();
+
     }
 
     return 0;
