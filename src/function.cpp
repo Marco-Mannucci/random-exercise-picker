@@ -21,7 +21,6 @@ void printBanner() {
     cout << "----------------------------------------------" << endl;
 
     cout << endl;
-
 }
 
 void getData( int &lowerLimit, int &upperLimit ) {
@@ -46,5 +45,34 @@ void getData( int &lowerLimit, int &upperLimit ) {
         }
 
     } while ( !input );
+}
 
+
+void playSession( std::mt19937 &gen, int lowerLimit, int upperLimit ) {
+
+    // Random number range
+    uniform_int_distribution<int> distrib( lowerLimit, upperLimit );
+
+    bool session = true;        // Session loop
+    int key;                    // To read Enter or Esc
+
+    cout << "Press \"Enter\" to generate the random exercise number or \"Esc\"to exit." << endl;
+
+    while ( session ) {
+
+        key = _getch();
+
+        // Enter = print the random number
+        if ( key == 13 ) {
+            cout << distrib( gen ) << endl;
+        }
+        // Esc = leave this session
+        else if ( key == 27 ) {
+            session = false;
+        }
+        // Invalid key
+        else {
+            cout << "Incorrect key, please re-enter!" << endl;
+        }
+    }
 }
