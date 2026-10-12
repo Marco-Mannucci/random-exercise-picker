@@ -37,5 +37,16 @@ int main() {
     bool input;                             // Checks whether the user input is valid
     string line;
 
+    while ( run ) {
+        while ( session ) {
+
+            // Read the limits from the user
+            getData( lowerLimit, upperLimit );
+
+            // Random number range
+            uniform_int_distribution<int> distrib( lowerLimit, upperLimit );
+        }
+    }
+
     return 0;
 }

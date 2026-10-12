@@ -1,6 +1,8 @@
 
-#ifdef FUNCTION_H
+#ifndef FUNCTION_H
 #define FUNCTION_H
+
+#include <random>
 
 // ASCII code Esc = 27
 // ASCII code Enter = 13
@@ -9,7 +11,7 @@
 // ASCII code N = 78
 // ASCII code n = 110
 
-void takeData( int &lowerLimit, int &upperLimit );
+void getData( int &lowerLimit, int &upperLimit );
 
 void printBanner();
 

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void takeData( int &lowerLimit, int &upperLimit ){
+void getData( int &lowerLimit, int &upperLimit ){
 
     bool input = true;
 
