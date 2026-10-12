@@ -7,11 +7,8 @@
 
 // Function to manage Dynamic arrays
 ArrayEs_t *newArray( int maxCapacity );
-
 void removeElement( ArrayEs_t *array );
-
 void expandArray( ArrayEs_t *array );
-
 
 // Prints the opening banner
 void printBanner();

@@ -98,7 +98,45 @@ bool askNewSession() {
         else {
             cout << "You can only enter \"Y\" or \"N\"; please try again!" << endl;
         }
+    }
+}
 
+ArrayEs_t *newArray( int maxCapacity ) {
+
+    // Struct
+    ArrayEs_t *array = new ArrayEs_t;
+
+    // Array
+    array->maxCapacity = maxCapacity;
+    array->numberElement = 0;
+    array->array = new ArrayEs_t[maxCapacity];
+}
+
+void removeElement( ArrayEs_t *array ) {
+
+    delete[] array->array;
+    array->array = nullptr;
+
+    array->maxCapacity = 0;
+    array->numberElement = 0;
+
+    delete array;
+}
+
+void expandArray( ArrayEs_t *array ) {
+    
+    int newCapacity = array->maxCapacity + 1;
+
+    // New array with new capacity
+    ArrayEs_t *newArray = new ArrayEs_t[newCapacity];
+
+    // Paste the elements
+    for ( int i = 0; i < array->maxCapacity; i++ ) {
+        newArray[i] = array->array[i];
     }
 
+    // Delete old array e refresh pointer
+    delete[] array->array;
+	array->array = newArray;
+	array->maxCapacity = newCapacity;
 }
