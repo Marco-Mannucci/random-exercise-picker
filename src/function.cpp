@@ -14,10 +14,12 @@ using namespace std;
 // ASCII code N = 78
 // ASCII code n = 110
 
+// ---- Program flow ----
+
 void printBanner() {
 
     cout << "----------------------------------------------" << endl;
-    cout << "|  GENERATORE DI NUMERI DI ESERCIZI CASUALI  |" << endl;
+    cout << "|      RANDOM EXERCISE NUMBER GENERATOR      |" << endl;
     cout << "----------------------------------------------" << endl;
 
     cout << endl;
@@ -47,7 +49,6 @@ void getData( int &lowerLimit, int &upperLimit ) {
     } while ( !input );
 }
 
-
 void playSession( std::mt19937 &gen, ArrayEs_t *arrayEx, int lowerLimit, int upperLimit ) {
 
     // Random number range
@@ -55,24 +56,24 @@ void playSession( std::mt19937 &gen, ArrayEs_t *arrayEx, int lowerLimit, int upp
 
     bool session = true;        // Session loop
     int key;                    // To read Enter or Esc
-    int element;                // The element that i'm going to show to the user
+    int element;                // The exercise number shown to the user
 
-    cout << "Press \"Enter\" to generate the random exercise number or \"Esc\"to exit." << endl;
+    cout << "Press \"Enter\" to generate the random exercise number or \"Esc\" to exit." << endl;
 
     while ( session ) {
 
         key = _getch();
 
-        // Enter = print the random number
+        // Enter = generate and print a random number
         if ( key == 13 ) {
+            // Draw again until the exercise has not been given yet
             do {
-                element = distrib(gen);
+                element = distrib( gen );
             } while ( checkExercise( arrayEx, element ) );
 
             addElements( arrayEx, element );
 
             cout << element << endl;
-
         }
         // Esc = leave this session
         else if ( key == 27 ) {
@@ -95,11 +96,11 @@ bool askNewSession() {
 
         key = _getch();
 
-        // Y
+        // Y or y
         if ( key == 89 || key == 121 ) {
             return true;
         }
-        // N
+        // N or n
         else if ( key == 78 || key == 110 ) {
             return false;
         }
@@ -108,6 +109,8 @@ bool askNewSession() {
         }
     }
 }
+
+// ---- Dynamic array management ----
 
 ArrayEs_t *newArray( int maxCapacity ) {
 
@@ -124,49 +127,38 @@ ArrayEs_t *newArray( int maxCapacity ) {
 
 void addElements( ArrayEs_t *arrayEx, int element ) {
 
-    // Check if the array exist
+    // Check that the array exists
     if ( arrayEx == nullptr ) {
         return;
     }
 
-    // If the array + the new element is full i expand it
+    // If there is no room for the new element, expand the array
     if ( ( arrayEx->numberElement + 1 ) >= arrayEx->maxCapacity ) {
         expandArray( arrayEx );
     }
 
     arrayEx->array[arrayEx->numberElement] = element;
 
-    // Refresh number of elements
+    // Update the number of elements
     arrayEx->numberElement++;
-
 }
 
 void expandArray( ArrayEs_t *arrayEx ) {
-    
+
     int newCapacity = arrayEx->maxCapacity + 1;
 
-    // New array with new capacity
+    // New array with the new capacity
     int *newArray = new int[newCapacity];
 
-    // Paste the elements
+    // Copy the elements
     for ( int i = 0; i < arrayEx->numberElement; i++ ) {
         newArray[i] = arrayEx->array[i];
     }
 
-    // Delete old array and refresh pointer
+    // Delete the old array and update the pointer
     delete[] arrayEx->array;
     arrayEx->array = newArray;
     arrayEx->maxCapacity = newCapacity;
-}
-
-void deleteAllElements( ArrayEs_t *arrayEx ) {
-
-    // Check if the array exist
-    if ( arrayEx == nullptr ) {
-        return;
-    }
-
-    arrayEx->numberElement = 0;
 }
 
 bool checkExercise( ArrayEs_t *arrayEx, int element ) {
@@ -180,7 +172,17 @@ bool checkExercise( ArrayEs_t *arrayEx, int element ) {
     return false;
 }
 
-void removeElement( ArrayEs_t *arrayEx ) {
+void deleteAllElements( ArrayEs_t *arrayEx ) {
+
+    // Check that the array exists
+    if ( arrayEx == nullptr ) {
+        return;
+    }
+
+    arrayEx->numberElement = 0;
+}
+
+void destroyArray( ArrayEs_t *arrayEx ) {
 
     delete[] arrayEx->array;
     arrayEx->array = nullptr;
