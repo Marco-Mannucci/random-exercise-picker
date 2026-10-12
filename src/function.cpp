@@ -179,3 +179,14 @@ bool checkExercise( ArrayEs_t *arrayEx, int element ) {
 
     return false;
 }
+
+void removeElement( ArrayEs_t *arrayEx ) {
+
+    delete[] arrayEx->array;
+    arrayEx->array = nullptr;
+
+    arrayEx->maxCapacity = 0;
+    arrayEx->numberElement = 0;
+
+    delete arrayEx;
+}
