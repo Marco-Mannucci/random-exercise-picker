@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void raccogliDati( int &limiteInferiore, int &limiteMaggiore ){
+void takeData( int &lowerLimit, int &upperLimit ){
 
     bool input = true;
 
@@ -12,15 +12,15 @@ void raccogliDati( int &limiteInferiore, int &limiteMaggiore ){
         input = true;
 
         // Lower limit
-        cout << "Inserisci il numero del primo esercizio dell'intervallo: " << endl;
-        cin >> limiteInferiore;
+        cout << "Enter the number of the first exercise in the range:" << endl;
+        cin >> lowerLimit;
 
         // Upper limit
-        cout << "Inserisci il numero dell'ultimo esercizio dell'intervallo: " << endl;
-        cin >> limiteMaggiore;
+        cout << "Enter the number of the last exercise in the range:" << endl;
+        cin >> upperLimit;
 
-        if ( limiteMaggiore <= limiteInferiore ) {
-            cout << "Inserisci correttamente i limiti!" << endl;
+        if ( lowerLimit <= upperLimit ) {
+            cout << "Enter the limits correctly!" << endl;
 
             input = false;
         }
