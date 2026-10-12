@@ -28,3 +28,10 @@ void getData( int &lowerLimit, int &upperLimit ){
     } while ( !input );
 
 }
+
+void printBanner() {
+    
+    cout << "---------------------------------------------" << endl;
+    cout << "|      RANDOM EXERCISE NUMBER GENERATOR      |" << endl;
+    cout << "---------------------------------------------" << endl;
+}

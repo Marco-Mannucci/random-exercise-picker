@@ -21,9 +21,7 @@ int main() {
     mt19937 gen( rd() );
 
     // Opening banner
-    cout << "---------------------------------------------" << endl;
-    cout << "|      RANDOM EXERCISE NUMBER GENERATOR      |" << endl;
-    cout << "---------------------------------------------" << endl;
+    printBanner();
 
     cout << endl;
 
