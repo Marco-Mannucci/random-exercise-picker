@@ -109,7 +109,9 @@ ArrayEs_t *newArray( int maxCapacity ) {
     // Array
     array->maxCapacity = maxCapacity;
     array->numberElement = 0;
-    array->array = new ArrayEs_t[maxCapacity];
+    array->array = new int[maxCapacity];
+
+    return array;
 }
 
 void removeElement( ArrayEs_t *array ) {
@@ -128,15 +130,26 @@ void expandArray( ArrayEs_t *array ) {
     int newCapacity = array->maxCapacity + 1;
 
     // New array with new capacity
-    ArrayEs_t *newArray = new ArrayEs_t[newCapacity];
+    int *newArray = new int[newCapacity];
 
     // Paste the elements
     for ( int i = 0; i < array->maxCapacity; i++ ) {
         newArray[i] = array->array[i];
     }
 
-    // Delete old array e refresh pointer
+    // Delete old array and refresh pointer
     delete[] array->array;
-	array->array = newArray;
-	array->maxCapacity = newCapacity;
+    array->array = newArray;
+    array->maxCapacity = newCapacity;
+}
+
+bool checkExercise( ArrayEs_t *array, int element ) {
+
+    for ( int i = 0; i < array->numberElement; i++ ) {
+        if ( array->array[i] == element ) {
+            return true;
+        }
+    }
+
+    return false;
 }

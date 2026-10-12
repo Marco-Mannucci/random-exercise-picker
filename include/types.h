@@ -9,7 +9,7 @@ typedef struct ArrayEs {
 
     int numberElement;
 
-    struct ArrayEs *array;
+    int *array;
 } ArrayEs_t;
 
 #endif
