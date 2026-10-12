@@ -13,3 +13,13 @@ using namespace std;
 // ASCII code y = 121
 // ASCII code N = 78
 // ASCII code n = 110
+
+void printBanner(){
+
+    cout << "----------------------------------------------" << endl;
+    cout << "|  GENERATORE DI NUMERI DI ESERCIZI CASUALI  |" << endl;
+    cout << "----------------------------------------------" << endl;
+
+    cout << endl;
+
+}
