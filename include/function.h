@@ -27,16 +27,16 @@ ArrayEs_t *newArray( int maxCapacity = 0 );
 // Adds an exercise to the array, expanding it when needed
 void addElements( ArrayEs_t *arrayEx, int element );
 
-// Increases the capacity of the array
+// Doubles the capacity of the array
 void expandArray( ArrayEs_t *arrayEx );
 
 // Checks if the exercise was already given
 bool checkExercise( ArrayEs_t *arrayEx, int element );
 
-// Removes all the elements from the array
+// Empties the array but keeps its memory, ready for a new session
 void deleteAllElements( ArrayEs_t *arrayEx );
 
-// Frees the array and the struct
+// Frees the array and the struct, to be called once at the end of the program
 void destroyArray( ArrayEs_t *arrayEx );
 
 #endif

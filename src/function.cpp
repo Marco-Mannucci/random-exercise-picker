@@ -54,6 +54,9 @@ void playSession( std::mt19937 &gen, ArrayEs_t *arrayEx, int lowerLimit, int upp
     // Random number range
     uniform_int_distribution<int> distrib( lowerLimit, upperLimit );
 
+    // How many exercises there are in the range
+    long long totalExercises = static_cast<long long>( upperLimit ) - lowerLimit + 1;
+
     bool session = true;        // Session loop
     int key;                    // To read Enter or Esc
     int element;                // The exercise number shown to the user
@@ -66,15 +69,23 @@ void playSession( std::mt19937 &gen, ArrayEs_t *arrayEx, int lowerLimit, int upp
 
         // Enter = generate and print a random number
         if ( key == 13 ) {
-            // Draw again until the exercise has not been given yet
-            do {
-                element = distrib( gen );
-            } while ( checkExercise( arrayEx, element ) );
+            // All the exercises of the range were already given
+            if ( arrayEx->numberElement >= totalExercises ) {
+                cout << "All the exercises in this range have been given!" << endl;
+                session = false;
+            }
+            else {
+                // Draw again until the exercise has not been given yet
+                do {
+                    element = distrib( gen );
+                } while ( checkExercise( arrayEx, element ) );
 
-            addElements( arrayEx, element );
+                addElements( arrayEx, element );
 
-            cout << element << endl;
+                cout << element << endl;
+            }
         }
+
         // Esc = leave this session
         else if ( key == 27 ) {
             session = false;
@@ -132,7 +143,7 @@ void addElements( ArrayEs_t *arrayEx, int element ) {
         return;
     }
 
-    // If there is no room for the new element, expand the array
+    // If the array is full, expand it
     if ( ( arrayEx->numberElement + 1 ) >= arrayEx->maxCapacity ) {
         expandArray( arrayEx );
     }
@@ -145,7 +156,15 @@ void addElements( ArrayEs_t *arrayEx, int element ) {
 
 void expandArray( ArrayEs_t *arrayEx ) {
 
-    int newCapacity = arrayEx->maxCapacity + 1;
+    // Double the capacity (an empty array starts from 1)
+    int newCapacity;
+
+    if ( arrayEx->maxCapacity == 0 ) {
+        newCapacity = 1;
+    }
+    else {
+        newCapacity = arrayEx->maxCapacity * 2;
+    }
 
     // New array with the new capacity
     int *newArray = new int[newCapacity];
@@ -163,6 +182,11 @@ void expandArray( ArrayEs_t *arrayEx ) {
 
 bool checkExercise( ArrayEs_t *arrayEx, int element ) {
 
+    // Check that the array exists
+    if ( arrayEx == nullptr ) {
+        return false;
+    }
+
     for ( int i = 0; i < arrayEx->numberElement; i++ ) {
         if ( arrayEx->array[i] == element ) {
             return true;
@@ -179,16 +203,18 @@ void deleteAllElements( ArrayEs_t *arrayEx ) {
         return;
     }
 
+    // Only reset the counter, the memory is kept for the next session
     arrayEx->numberElement = 0;
 }
 
 void destroyArray( ArrayEs_t *arrayEx ) {
 
+    // Check that the array exists
+    if ( arrayEx == nullptr ) {
+        return;
+    }
+
+    // First the inner array, then the struct
     delete[] arrayEx->array;
-    arrayEx->array = nullptr;
-
-    arrayEx->maxCapacity = 0;
-    arrayEx->numberElement = 0;
-
     delete arrayEx;
 }
