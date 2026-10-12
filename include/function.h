@@ -6,10 +6,10 @@
 #include <random>
 
 // Function to manage Dynamic arrays
-ArrayEs_t *newArray( int maxCapacity );
-void removeElement( ArrayEs_t *array );
-void expandArray( ArrayEs_t *array );
-void addElements( ArrayEs_t *array, int element );
+ArrayEs_t *newArray( int maxCapacity = 0 );
+void removeElement( ArrayEs_t *arrayEx );
+void expandArray( ArrayEs_t *arrayEx );
+void addElements( ArrayEs_t *arrayEx, int element );
 
 // Prints the opening banner
 void printBanner();
@@ -18,7 +18,7 @@ void printBanner();
 void getData( int &lowerLimit, int &upperLimit );
 
 // Runs one session: Enter generates a random exercise, Esc ends the session
-void playSession( std::mt19937 &gen, int lowerLimit, int upperLimit );
+void playSession( std::mt19937 &gen, ArrayEs_t *arrayEx, int lowerLimit, int upperLimit );
 
 // Asks whether to start a new session, returns true for yes
 bool askNewSession();

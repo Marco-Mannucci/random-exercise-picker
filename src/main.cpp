@@ -21,6 +21,7 @@ int main(){
     printBanner();
 
     int lowerLimit, upperLimit;             // Limits
+    ArrayEs_t *arrayEx = newArray();
     bool run = true;                        // Main loop
 
     while ( run ) {

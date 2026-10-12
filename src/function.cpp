@@ -48,13 +48,14 @@ void getData( int &lowerLimit, int &upperLimit ) {
 }
 
 
-void playSession( std::mt19937 &gen, int lowerLimit, int upperLimit ) {
+void playSession( std::mt19937 &gen, ArrayEs_t *arrayEx, int lowerLimit, int upperLimit ) {
 
     // Random number range
     uniform_int_distribution<int> distrib( lowerLimit, upperLimit );
 
     bool session = true;        // Session loop
     int key;                    // To read Enter or Esc
+    int element;                // The element that i'm going to show to the user
 
     cout << "Press \"Enter\" to generate the random exercise number or \"Esc\"to exit." << endl;
 
@@ -64,7 +65,14 @@ void playSession( std::mt19937 &gen, int lowerLimit, int upperLimit ) {
 
         // Enter = print the random number
         if ( key == 13 ) {
-            cout << distrib( gen ) << endl;
+            do {
+                element = distrib(gen);
+            } while ( checkExercise( arrayEx, element ) );
+
+            addElements( arrayEx, element );
+
+            cout << element << endl;
+
         }
         // Esc = leave this session
         else if ( key == 27 ) {
@@ -104,68 +112,68 @@ bool askNewSession() {
 ArrayEs_t *newArray( int maxCapacity ) {
 
     // Struct
-    ArrayEs_t *array = new ArrayEs_t;
+    ArrayEs_t *arrayEx = new ArrayEs_t;
 
     // Array
-    array->maxCapacity = maxCapacity;
-    array->numberElement = 0;
-    array->array = new int[maxCapacity];
+    arrayEx->maxCapacity = maxCapacity;
+    arrayEx->numberElement = 0;
+    arrayEx->array = new int[maxCapacity];
 
-    return array;
+    return arrayEx;
 }
 
-void addElements( ArrayEs_t *array, int element ) {
+void addElements( ArrayEs_t *arrayEx, int element ) {
 
     // Check if the array exist
-    if ( array == nullptr ) {
+    if ( arrayEx == nullptr ) {
         return;
     }
 
     // If the array + the new element is full i expand it
-    if ( ( array->numberElement + 1 ) >= array->maxCapacity ) {
-        expandArray( array );
+    if ( ( arrayEx->numberElement + 1 ) >= arrayEx->maxCapacity ) {
+        expandArray( arrayEx );
     }
 
-    array->array[array->numberElement] = element;
+    arrayEx->array[arrayEx->numberElement] = element;
 
     // Refresh number of elements
-    array->numberElement++;
+    arrayEx->numberElement++;
 
 }
 
-void removeElement( ArrayEs_t *array ) {
+void removeElement( ArrayEs_t *arrayEx ) {
 
-    delete[] array->array;
-    array->array = nullptr;
+    delete[] arrayEx->array;
+    arrayEx->array = nullptr;
 
-    array->maxCapacity = 0;
-    array->numberElement = 0;
+    arrayEx->maxCapacity = 0;
+    arrayEx->numberElement = 0;
 
-    delete array;
+    delete arrayEx;
 }
 
-void expandArray( ArrayEs_t *array ) {
+void expandArray( ArrayEs_t *arrayEx ) {
     
-    int newCapacity = array->maxCapacity + 1;
+    int newCapacity = arrayEx->maxCapacity + 1;
 
     // New array with new capacity
     int *newArray = new int[newCapacity];
 
     // Paste the elements
-    for ( int i = 0; i < array->numberElement; i++ ) {
-        newArray[i] = array->array[i];
+    for ( int i = 0; i < arrayEx->numberElement; i++ ) {
+        newArray[i] = arrayEx->array[i];
     }
 
     // Delete old array and refresh pointer
-    delete[] array->array;
-    array->array = newArray;
-    array->maxCapacity = newCapacity;
+    delete[] arrayEx->array;
+    arrayEx->array = newArray;
+    arrayEx->maxCapacity = newCapacity;
 }
 
-bool checkExercise( ArrayEs_t *array, int element ) {
+bool checkExercise( ArrayEs_t *arrayEx, int element ) {
 
-    for ( int i = 0; i < array->numberElement; i++ ) {
-        if ( array->array[i] == element ) {
+    for ( int i = 0; i < arrayEx->numberElement; i++ ) {
+        if ( arrayEx->array[i] == element ) {
             return true;
         }
     }
