@@ -76,3 +76,29 @@ void playSession( std::mt19937 &gen, int lowerLimit, int upperLimit ) {
         }
     }
 }
+
+bool askNewSession() {
+
+    int key;
+
+    cout << "Start a new session? [Y/N]" << endl;
+
+    while ( true ) {
+
+        key = _getch();
+
+        // Y
+        if ( key == 89 || key == 121 ) {
+            return true;
+        }
+        // N
+        else if ( key == 78 || key == 110 ) {
+            return false;
+        }
+        else {
+            cout << "You can only enter \"Y\" or \"N\"; please try again!" << endl;
+        }
+
+    }
+
+}
