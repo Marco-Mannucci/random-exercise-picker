@@ -11,4 +11,10 @@
 
 void takeData( int &lowerLimit, int &upperLimit );
 
+void printBanner();
+
+void playSession( std::mt19937 &gen, int lowerLimit, int upperLimit );
+
+bool askNewSession();
+
 #endif

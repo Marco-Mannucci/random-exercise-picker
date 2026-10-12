@@ -33,7 +33,9 @@ int main() {
 
     // Variables used inside the loops
     int lowerLimit, upperLimit;             // Limits
-    int key;                              // To read Enter or Esc
+    int key;                                // To read Enter or Esc
     bool input;                             // Checks whether the user input is valid
     string line;
+
+    return 0;
 }
