@@ -4,9 +4,10 @@
 // Remembers the exercises already proposed and does not propose them again
 // Press Esc to start over with a new range
 
-// ASCII code Esc = 27
-// ASCII code Enter = 13
-// ASCII code Y = 89
-// ASCII code y = 121
-// ASCII code N = 78
-// ASCII code n = 110
+#include "function.h"
+#include <iostream>
+#include <random>
+#include <string>
+#include <conio.h>      // To read the Esc key
+
+using namespace std;
