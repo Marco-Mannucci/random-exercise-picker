@@ -141,17 +141,6 @@ void addElements( ArrayEs_t *arrayEx, int element ) {
 
 }
 
-void removeElement( ArrayEs_t *arrayEx ) {
-
-    delete[] arrayEx->array;
-    arrayEx->array = nullptr;
-
-    arrayEx->maxCapacity = 0;
-    arrayEx->numberElement = 0;
-
-    delete arrayEx;
-}
-
 void expandArray( ArrayEs_t *arrayEx ) {
     
     int newCapacity = arrayEx->maxCapacity + 1;
@@ -168,6 +157,16 @@ void expandArray( ArrayEs_t *arrayEx ) {
     delete[] arrayEx->array;
     arrayEx->array = newArray;
     arrayEx->maxCapacity = newCapacity;
+}
+
+void deleteAllElements( ArrayEs_t *arrayEx ) {
+
+    // Check if the array exist
+    if ( arrayEx == nullptr ) {
+        return;
+    }
+
+    arrayEx->numberElement = 0;
 }
 
 bool checkExercise( ArrayEs_t *arrayEx, int element ) {

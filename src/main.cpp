@@ -28,10 +28,15 @@ int main(){
 
         getData( lowerLimit, upperLimit );
 
-        playSession( gen, lowerLimit, upperLimit );
+        playSession( gen, arrayEx, lowerLimit, upperLimit );
 
         // Y = new session, N = exit the program
         run = askNewSession();
+
+        // Remove all the elements from the array
+        if ( !run ) {
+            deleteAllElements( arrayEx );
+        }
 
     }
 
