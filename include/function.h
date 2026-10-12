@@ -5,11 +5,7 @@
 #include "types.h"
 #include <random>
 
-// Function to manage Dynamic arrays
-ArrayEs_t *newArray( int maxCapacity = 0 );
-void expandArray( ArrayEs_t *arrayEx );
-void addElements( ArrayEs_t *arrayEx, int element );
-void deleteAllElements( ArrayEs_t *arrayEx );
+// ---- Program flow ----
 
 // Prints the opening banner
 void printBanner();
@@ -23,7 +19,24 @@ void playSession( std::mt19937 &gen, ArrayEs_t *arrayEx, int lowerLimit, int upp
 // Asks whether to start a new session, returns true for yes
 bool askNewSession();
 
-// Check if the exercise was already given
-bool checkExercise( ArrayEs_t *array, int element );
+// ---- Dynamic array management ----
+
+// Creates the array of the exercises already given
+ArrayEs_t *newArray( int maxCapacity = 0 );
+
+// Adds an exercise to the array, expanding it when needed
+void addElements( ArrayEs_t *arrayEx, int element );
+
+// Increases the capacity of the array
+void expandArray( ArrayEs_t *arrayEx );
+
+// Checks if the exercise was already given
+bool checkExercise( ArrayEs_t *arrayEx, int element );
+
+// Removes all the elements from the array
+void deleteAllElements( ArrayEs_t *arrayEx );
+
+// Frees the array and the struct
+void destroyArray( ArrayEs_t *arrayEx );
 
 #endif
