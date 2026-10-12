@@ -27,7 +27,7 @@ int main(){
 
         getData( lowerLimit, upperLimit );
 
-        eseguiSessione( gen, lowerLimit, upperLimit );
+        playSession( gen, lowerLimit, upperLimit );
 
         // Y = new session, N = exit the program
         run = askNewSession();
