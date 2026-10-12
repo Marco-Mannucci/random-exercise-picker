@@ -114,6 +114,25 @@ ArrayEs_t *newArray( int maxCapacity ) {
     return array;
 }
 
+void addElements( ArrayEs_t *array, int element ) {
+
+    // Check if the array exist
+    if ( array == nullptr ) {
+        return;
+    }
+
+    // If the array + the new element is full i expand it
+    if ( ( array->numberElement + 1 ) >= array->maxCapacity ) {
+        expandArray( array );
+    }
+
+    array->array[array->numberElement] = element;
+
+    // Refresh number of elements
+    array->numberElement++;
+
+}
+
 void removeElement( ArrayEs_t *array ) {
 
     delete[] array->array;
@@ -133,7 +152,7 @@ void expandArray( ArrayEs_t *array ) {
     int *newArray = new int[newCapacity];
 
     // Paste the elements
-    for ( int i = 0; i < array->maxCapacity; i++ ) {
+    for ( int i = 0; i < array->numberElement; i++ ) {
         newArray[i] = array->array[i];
     }
 
