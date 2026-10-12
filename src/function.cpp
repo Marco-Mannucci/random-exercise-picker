@@ -40,7 +40,7 @@ void getData( int &lowerLimit, int &upperLimit ) {
         cout << "Enter the number of the last exercise in the range:" << endl;
         cin >> upperLimit;
 
-        if ( lowerLimit <= upperLimit ) {
+        if ( lowerLimit >= upperLimit ) {
             cout << "Enter the limits correctly!" << endl;
 
             input = false;
