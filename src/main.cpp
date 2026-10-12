@@ -4,9 +4,9 @@
 // Remembers the exercises already proposed and does not propose them again
 // Press Esc to start over with a new range
 
-#include <random>
-
 #include "function.h"
+
+#include <random>
 
 using namespace std;
 

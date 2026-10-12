@@ -2,7 +2,16 @@
 #ifndef FUNCTION_H
 #define FUNCTION_H
 
+#include "types.h"
 #include <random>
+
+// Function to manage Dynamic arrays
+ArrayEs_t *newArray( int maxCapacity );
+
+void removeElement( ArrayEs_t *array );
+
+void expandArray( ArrayEs_t *array );
+
 
 // Prints the opening banner
 void printBanner();
@@ -15,5 +24,8 @@ void playSession( std::mt19937 &gen, int lowerLimit, int upperLimit );
 
 // Asks whether to start a new session, returns true for yes
 bool askNewSession();
+
+// Check if the exercise was already given
+bool checkExercise( int exercise );
 
 #endif

@@ -2,13 +2,14 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-typedef struct arrayEs {
+// Dynamic array that contains exercises already given
+typedef struct ArrayEs {
 
     int maxCapacity;
 
     int numberElement;
 
-    struct ArrayEs_t *array;
+    struct ArrayEs *array;
 } ArrayEs_t;
 
 #endif
